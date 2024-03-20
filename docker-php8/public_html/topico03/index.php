@@ -1,13 +1,12 @@
 <?php
-
-require_once "Funcionario.php";
-require_once "Departamento.php";
-require_once "Pessoa.php";
-require_once "./Financas/Conta.php";
-require_once "./Seguranca/Conta.php";
+spl_autoload_register(function($classe){
+    echo "Fez o require do {$classe}.php";
+    require_once str_replace('\\', '/', $classe.'.php');
+});
 
 //use Seguranca\Conta;
-use Financas\Conta;
+use Financas\Conta as ContaF;
+use Seguranca\Conta as ContaS;
 
 $func1 = new Funcionario(2000, 'Juquinha', 123);
 $func2 = new Funcionario(2000, 'Mariazinha', 456);
@@ -35,4 +34,5 @@ $dep->addFuncionario($func2);
 //$func1->setIdentidade(789);
 //echo $func1->identidade = 789;
 
-$seguranca = new Conta();
+$contaS = new ContaS();
+$contaF = new ContaF();
